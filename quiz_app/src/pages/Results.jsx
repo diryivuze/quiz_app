@@ -1,19 +1,20 @@
-import { useQuiz } from '../contexts/QuizContext';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import ScoreDisplay from '../components/quiz/ScoreDisplay';
+import { motion } from 'framer-motion';
 
-function Results() {
-  const { score, resetQuiz } = useQuiz();
-
+const Results = ({ score }) => {
   return (
-    <div className="container mx-auto p-6 text-center">
-      <h2 className="text-2xl font-bold mb-4">Quiz Results</h2>
-      <p className="text-gray-700">Your Score: {score}</p>
-      <button onClick={resetQuiz} className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
-        Retry
-      </button>
-      <Link to="/leaderboard" className="mt-4 block text-blue-500 underline">View Leaderboard</Link>
-    </div>
+    <motion.div 
+      className="container mx-auto text-center mt-10"
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 0.5 }}
+    >
+      <h1 className="text-3xl font-bold">Quiz Completed!</h1>
+      <ScoreDisplay score={score} />
+      <button className="mt-4 bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition">Play Again</button>
+    </motion.div>
   );
-}
+};
 
 export default Results;

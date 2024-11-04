@@ -1,20 +1,30 @@
-function QuestionCard({ question, options, onAnswer }) {
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const QuestionCard = ({ question, options, onOptionSelect }) => {
   return (
-    <div className="bg-white p-4 rounded shadow">
-      <h3 className="text-lg font-semibold mb-2">{question}</h3>
+    <motion.div 
+      className="bg-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105"
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      exit={{ opacity: 0 }}
+    >
+      <h2 className="text-xl font-semibold mb-4">{question}</h2>
       <div className="space-y-2">
         {options.map((option, index) => (
-          <button
+          <motion.button 
             key={index}
-            onClick={() => onAnswer(index)}
-            className="w-full text-left bg-gray-200 p-2 rounded hover:bg-blue-100"
+            onClick={() => onOptionSelect(option)}
+            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-transform transform hover:scale-105"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             {option}
-          </button>
+          </motion.button>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
-}
+};
 
 export default QuestionCard;

@@ -1,18 +1,23 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-function QuizSelect() {
+const QuizSelect = () => {
   return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Select a Quiz</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Example quiz item */}
-        <Link to="/quiz" className="bg-white shadow rounded p-4 hover:bg-blue-100">
-          <h3 className="font-semibold">Sample Quiz</h3>
-          <p className="text-gray-600">Description of the quiz.</p>
+    <div className="container mx-auto text-center mt-10">
+      <h1 className="text-3xl font-bold">Select a Quiz</h1>
+      <motion.div 
+        className="mt-4"
+        initial={{ y: -20, opacity: 0 }} 
+        animate={{ y: 0, opacity: 1 }} 
+        transition={{ duration: 0.5 }}
+      >
+        <Link to="/quiz" className="inline-block bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition">
+          General Knowledge
         </Link>
-      </div>
+      </motion.div>
     </div>
   );
-}
+};
 
 export default QuizSelect;

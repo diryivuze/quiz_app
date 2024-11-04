@@ -1,23 +1,32 @@
-import { createContext, useState, useContext } from 'react';
+import React, { createContext, useState } from 'react';
 
-const QuizContext = createContext();
+export const QuizContext = createContext();
 
-export const QuizProvider = ({ children }) => {
+const QuizProvider = ({ children }) => {
+  const [questions, setQuestions] = useState([
+    {
+      question: 'What is the capital of France?',
+      options: ['Berlin', 'Madrid', 'Paris', 'Lisbon'],
+      correctAnswer: 'Paris',
+    },
+    {
+      question: 'What is 2 + 2?',
+      options: ['3', '4', '5', '6'],
+      correctAnswer: '4',
+    },
+  ]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [completed, setCompleted] = useState(false);
 
-  const resetQuiz = () => {
-    setCurrentQuestionIndex(0);
-    setScore(0);
-    setCompleted(false);
+  const handleNextQuestion = () => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
 
   return (
-    <QuizContext.Provider value={{ currentQuestionIndex, setCurrentQuestionIndex, score, setScore, completed, setCompleted, resetQuiz }}>
+    <QuizContext.Provider value={{ questions, currentQuestionIndex, score, setScore, handleNextQuestion }}>
       {children}
     </QuizContext.Provider>
   );
 };
 
-export const useQuiz = () => useContext(QuizContext);
+export default QuizProvider;

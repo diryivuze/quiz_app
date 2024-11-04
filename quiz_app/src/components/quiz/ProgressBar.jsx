@@ -1,11 +1,14 @@
-function ProgressBar({ current, total }) {
-    const progress = (current / total) * 100;
-    return (
-      <div className="w-full bg-gray-300 h-2 rounded">
-        <div style={{ width: `${progress}%` }} className="bg-blue-600 h-2 rounded"></div>
-      </div>
-    );
-  }
-  
-  export default ProgressBar;
-  
+import React from 'react';
+
+const ProgressBar = ({ progress }) => {
+  return (
+    <div className="relative w-full h-4 bg-gray-300 rounded-full mb-4">
+      <div
+        className="absolute h-full bg-blue-500 rounded-full"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  );
+};
+
+export default ProgressBar;
