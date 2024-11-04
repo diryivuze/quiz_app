@@ -44,3 +44,4 @@ const QuestionCard = ({ question, onAnswer }) => {
     </Card>
   );
 };
+export default QuestionCard ;

@@ -34,3 +34,4 @@ const QuizSelect = () => {
     </div>
   );
 };
+export default QuizSelect ;
