@@ -2,8 +2,8 @@ import React from 'react';
 
 const Explanation = ({ explanation }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 mt-4">
-      <h2 className="text-xl font-semibold">Explanation</h2>
+    <div className="bg-gray-100 p-4 rounded">
+      <h3 className="font-semibold">Explanation:</h3>
       <p>{explanation}</p>
     </div>
   );
