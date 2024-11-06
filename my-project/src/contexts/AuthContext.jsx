@@ -1,36 +1,40 @@
-import React, { createContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// src/contexts/AuthContext.jsx
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { auth } from "../firebaseConfig";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-export const AuthContext = createContext();
+// Create AuthContext
+const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+// Custom hook to use the AuthContext
+export function useAuth() {
+  return useContext(AuthContext);
+}
+
+// AuthProvider component to provide AuthContext to children
+export function AuthProvider({ children }) {
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
-  const login = async (username, password) => {
-    // Replace with actual authentication logic
-    if (username === "user" && password === "password") {
-      setUser({ username });
-      navigate('/quiz-select');
-    } else {
-      alert("Invalid login credentials");
-    }
-  };
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      if (!user) {
+        navigate("/login");
+      }
+    });
+    return unsubscribe;
+  }, [navigate]);
 
-  const signup = async (username, password) => {
-    // Replace with actual signup logic
-    setUser({ username });
-    navigate('/quiz-select');
-  };
+  const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
+  const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+  const logout = () => signOut(auth);
 
-  const logout = () => {
-    setUser(null);
-    navigate('/');
-  };
+  const value = { currentUser, login, signup, logout };
+  
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
 
-  return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+// Explicitly export AuthContext if needed
+export { AuthContext };

@@ -1,5 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
+import { useAuth } from "../contexts/AuthContext"; // Use the custom hook to access the context
+
+const { signup } = useAuth();
 
 const Signup = () => {
   const { signup } = useContext(AuthContext);

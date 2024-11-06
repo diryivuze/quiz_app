@@ -1,38 +1,51 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
+// src/pages/Login.jsx
+import React, { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { FaUser, FaLock } from "react-icons/fa";
 
 const Login = () => {
-  const { login } = useContext(AuthContext);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login(username, password);
+  const handleLogin = async () => {
+    try {
+      await login(credentials.email, credentials.password);
+      navigate("/quiz-select");
+    } catch (err) {
+      setError("Invalid login credentials");
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h2 className="text-3xl font-bold mb-4">Login</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full p-2 border rounded"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 border rounded"
-        />
-        <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded shadow-lg max-w-sm w-full">
+        <h2 className="text-2xl font-semibold text-center mb-4">Login</h2>
+        <div className="mb-4">
+          <FaUser className="inline-block mr-2" />
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full p-2 border rounded"
+            onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+          />
+        </div>
+        <div className="mb-4">
+          <FaLock className="inline-block mr-2" />
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full p-2 border rounded"
+            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+          />
+        </div>
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <button className="w-full bg-blue-600 text-white p-2 rounded mt-4" onClick={handleLogin}>
           Login
         </button>
-      </form>
+      </div>
     </div>
   );
 };
