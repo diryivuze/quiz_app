@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getQuestions } from '../firebase/config';
-import QuizSetup from '../components/quiz/QuizSetup';
-import QuizQuestion from '../components/quiz/QuizQuestion';
-import Timer from '../components/quiz/Timer';
+import QuizSetup from './quiz/QuizSetup';
+import QuizQuestion from './quiz/QuizQuestion';
+import Timer from './quiz/Timer';
 import { ArrowRight, Clock, AlertCircle } from 'lucide-react';
 
 export default function Quiz() {

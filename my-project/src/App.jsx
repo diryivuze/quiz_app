@@ -1,42 +1,40 @@
-// src/App.jsx
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Contact from './pages/Contact';
-import About from './pages/About';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Quiz from './pages/Quiz';
-import Results from './pages/Results';
-import Resources from './pages/Resources';
-import AdminPanel from './pages/AdminPanel';
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Quiz from "./components/Quiz";
+import Results from "./components/Results";
+import Resources from "./components/Resources";
+import AdminPanel from "./components/AdminPanel";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useAuth();
-  if (!currentUser) return <Navigate to="/login" />;
-  return children;
+  return currentUser ? children : <Navigate to="/login" />;
 };
 
 // Admin Route Component
 const AdminRoute = ({ children }) => {
-  const { isAdmin } = useAuth();
-  if (!isAdmin) return <Navigate to="/quiz" />;
-  return children;
+  const { currentUser } = useAuth();
+  const isAdmin = currentUser?.email === "admin" && currentUser?.password === "Admin@123";
+  return isAdmin ? children : <Navigate to="/quiz" />;
 };
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <div className="min-h-screen bg-gray-50">
+    <BrowserRouter>
+      <AuthProvider>
+        <div className="min-h-screen bg-gray-100">
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route 
@@ -73,8 +71,8 @@ function App() {
             />
           </Routes>
         </div>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
