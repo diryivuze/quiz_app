@@ -83,7 +83,6 @@ To deploy your own version:
 ![Macbook-Air-localhost (4)](https://github.com/user-attachments/assets/cebb1922-0039-4a83-95af-6527af2078c4)
 ![iPhone-14-Plus-localhost](https://github.com/user-attachments/assets/74585cd3-5612-4615-986f-75d556d78cd3)
 ![iPhone-13-PRO-localhost (2)](https://github.com/user-attachments/assets/b17ce21f-bddb-4206-90f4-866364bc2c12)
-![iPhone-13-PRO-localhost (3)](https://github.com/user-attachments/assets/91e952bb-aae6-4740-84ab-3ca9fd183af9)
 ![Macbook-Air-localhost (5)](https://github.com/user-attachments/assets/716a4d6d-6161-45cf-883e-1d158a38a8ac)
 
 ## Contributing
