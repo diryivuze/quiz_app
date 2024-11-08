@@ -30,19 +30,19 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
-      details: "support@quizapp.com",
-      link: "mailto:support@quizapp.com"
+      details: "danieliryivuze4@imail.com",
+      link: "mailto:danieliryivuze4@imail.com"
     },
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
-      details: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
+      details: "+250 780 162 164",
+      link: "tel:+250780162164"
     },
     {
       icon: <MapPin className="w-6 h-6" />,
       title: "Location",
-      details: "123 Quiz Street, Learning City, ED 12345",
+      details: "Kigali - Rwanda",
       link: "#"
     }
   ];
